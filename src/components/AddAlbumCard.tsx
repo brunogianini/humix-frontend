@@ -5,31 +5,55 @@ import {
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
-    AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "./ui/button"
+import { Input } from "./ui/input"
+import { useState } from "react"
+import Cookies from 'js-cookie';
 
 export default function AddAlbumCard() {
+    const [nome, setNome] = useState("")
+    const [banda, setBanda] = useState("")
+
+    async function createAlbum(nome: string, banda: string) {
+        const token = Cookies.get('token');
+
+        if (!token) {
+            throw new Error('Token de autenticação não encontrado.');
+        }
+
+        const res = await fetch('http://localhost:4000/api/album', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`, 
+                "Access-Control-Allow-Origin": '*'
+            },
+            cache: 'no-store',
+            body: JSON.stringify({nome: nome, banda: banda})
+            
+        })
+        window.location.reload()
+    }
+
 
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild><Button variant={"secondary"} className="">Adicionar Album</Button></AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </AlertDialogDescription>
+                    <AlertDialogTitle>Adicionar Album</AlertDialogTitle>
                 </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction>Continue</AlertDialogAction>
-                </AlertDialogFooter>
+                <AlertDialogContent>
+                    <Input placeholder="Nome do Álbum" onChange={(e) => setNome(e.target.value)} />
+                    <Input placeholder="Banda" onChange={(e) => setBanda(e.target.value)} />
+
+                    <Button variant={"secondary"} onClick={(e) => {createAlbum(nome, banda)}}>Adicionar Album</Button>
+                </AlertDialogContent>
             </AlertDialogContent>
         </AlertDialog>
     )

@@ -5,8 +5,20 @@ import AlbumCard from "./AlbumCard";
 import { Album } from "@/entities/album.entity";
 import Cookies from 'js-cookie';
 
-export default function AlbumGrid() {
+interface Props {
+    tipo: number
+  }
+  
+
+export default function AlbumGrid({ tipo }: Props) {
     const [albums, setAlbums] = useState<Album[]>([])
+    let url = ""
+
+    if(tipo == 0){
+        url = 'http://localhost:4000/api/user/albums/'
+    }else{
+        url = 'http://localhost:4000/api/user/albums/rated'
+    }
 
     async function getAlbums() {
         const token = Cookies.get('token');
@@ -15,7 +27,7 @@ export default function AlbumGrid() {
             throw new Error('Token de autenticação não encontrado.');
         }
 
-        const res = await fetch('http://localhost:4000/api/user/albums/', {
+        const res = await fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -37,7 +49,7 @@ export default function AlbumGrid() {
     return (
         <main className="flex gap-5 flex-wrap">
             {albums.map((album, key) => (
-                <AlbumCard key={key} nome={album.nome} id={album.id} capa={album.capa} link={album.link} banda={album.banda} nota={0} ratings={[]} />
+                <AlbumCard key={key} nome={album.nome} id={album.id} capa={album.capa} link={album.link} banda={album.banda} nota={0} ratings={album.ratings} />
             ))}
         </main>
     );
