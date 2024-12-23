@@ -9,6 +9,8 @@ import {
   Sparkles,
 } from "lucide-react"
 
+import Cookies from 'js-cookie';
+
 import {
   Avatar,
   AvatarFallback,
@@ -97,7 +99,8 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              Log out
+                <p onClick={(e) => {Cookies.remove('token'); window.location.reload()}}>Log out</p>
+              
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
