@@ -21,6 +21,9 @@ import {
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
+import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import AddAlbumCard from "@/components/AddAlbumCard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname()
+  
+  useEffect(() => {})
 
   if (pathname === '/login') {
     return <html>
@@ -50,7 +55,7 @@ export default function RootLayout({
     </html>
   }
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -64,26 +69,19 @@ export default function RootLayout({
           <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-              <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-                <div className="flex items-center gap-2 px-4">
+              <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 justify-between
+              ">
+                <div className="flex items-center gap-2 px-4 w-full justify-between">
+                  <div className="flex items-center">
                   <SidebarTrigger className="-ml-1" />
                   <Separator orientation="vertical" className="mr-2 h-4" />
-                  <Breadcrumb>
-                    <BreadcrumbList>
-                      <BreadcrumbItem className="hidden md:block">
-                        <BreadcrumbLink href="#">
-                          Building Your Application
-                        </BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator className="hidden md:block" />
-                      <BreadcrumbItem>
-                        <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                      </BreadcrumbItem>
-                    </BreadcrumbList>
-                  </Breadcrumb>
+                  </div>
+
+                  <AddAlbumCard />
+                  
                 </div>
               </header>
-              <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+              <div className="flex flex-1 flex-col gap-4 p-4 pt-0 max-h-screen">
                 {children}
               </div>
             </SidebarInset>

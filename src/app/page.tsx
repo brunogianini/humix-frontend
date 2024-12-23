@@ -1,7 +1,8 @@
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>a</div>
+    <main className="overflow-hidden">
+     
+    </main>
   );
 }

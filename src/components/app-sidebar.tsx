@@ -44,15 +44,15 @@ const data = {
       items: [
         {
           title: "Não Ouvidos",
-          url: "#",
+          url: "/nao-ouvidos",
         },
         {
           title: "Ranking",
-          url: "#",
+          url: "/ranking",
         },
         {
           title: "Favoritos",
-          url: "#",
+          url: "/favoritos",
         },
       ],
     },
@@ -60,14 +60,15 @@ const data = {
       title: "Bandas",
       url: "#",
       icon: Bot,
+      isActive: true,
       items: [
         {
           title: "Lista",
-          url: "#",
+          url: "/bandas",
         },
         {
           title: "Favoritos",
-          url: "#",
+          url: "/minhas-bandas",
         }
       ],
     },
@@ -75,22 +76,23 @@ const data = {
       title: "Meu Perfil",
       url: "#",
       icon: BookOpen,
+      isActive: true,
       items: [
         {
           title: "Destaques",
-          url: "#",
+          url: "/destaques",
         },
         {
           title: "Minhas Badges",
-          url: "#",
+          url: "/badges",
         },
         {
           title: "Amigos",
-          url: "#",
+          url: "/amigos",
         },
         {
           title: "Recomendações",
-          url: "#",
+          url: "/recomendacoes",
         },
       ],
     },
@@ -157,7 +159,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <a href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <Command className="size-4" />
                 </div>
