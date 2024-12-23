@@ -16,7 +16,7 @@ const AlbumRating = ({nota, id}: any) => {
         throw new Error('Token de autenticação não encontrado.');
     }
 
-    const res = await fetch('http://localhost:4000/api/user/album/' + id, {
+    const res = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/api/user/album/' + id, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',

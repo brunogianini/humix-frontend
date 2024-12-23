@@ -17,9 +17,9 @@ export default function AlbumGrid({ tipo }: Props) {
     let url = ""
 
     if (tipo == 0) {
-        url = 'http://localhost:4000/api/user/albums/'
+        url = 'https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/api/user/albums/'
     } else {
-        url = 'http://localhost:4000/api/user/albums/rated'
+        url = 'https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/api/user/albums/rated'
     }
 
     async function getAlbums() {

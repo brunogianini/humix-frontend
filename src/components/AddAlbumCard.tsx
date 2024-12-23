@@ -26,7 +26,7 @@ export default function AddAlbumCard() {
             throw new Error('Token de autenticação não encontrado.');
         }
 
-        const res = await fetch('http://localhost:4000/api/album', {
+        const res = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/api/album', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

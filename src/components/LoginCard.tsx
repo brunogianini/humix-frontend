@@ -41,7 +41,7 @@ export default function LoginCard() {
         }
 
         try {
-            const response = await fetch('http://localhost:4000/api/user/login', {
+            const response = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/api/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export default function LoginCard() {
         }
 
         try {
-            const response = await fetch('http://localhost:4000/api/user/registrar', {
+            const response = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/api/user/registrar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
