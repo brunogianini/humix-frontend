@@ -7,7 +7,7 @@ export interface Album{
     link: string
     banda: Banda
     nota: number
-    songs?: Track[]
+    songs: Track[]
     ratings: {
         id: number;
         userId: number;
