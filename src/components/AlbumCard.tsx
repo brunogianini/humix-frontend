@@ -2,18 +2,14 @@
 
 import {
     AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
     AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
 import { Album } from "@/entities/album.entity";
 import { Card, CardContent } from "./ui/card";
+import AlbumDetails from "./AlbumDetails";
+import { AlertDialogTitle } from "@radix-ui/react-alert-dialog";
 
 export default function AlbumCard({ ...props }: Album) {
     let tem_nota = false
@@ -65,9 +61,9 @@ export default function AlbumCard({ ...props }: Album) {
 
 
                 </AlertDialogTrigger>
-                <AlertDialogContent className="album-details">
-
-                    a
+                <AlertDialogContent className="max-w-screen w-[1500px] h-[800px]">
+                    <AlertDialogTitle hidden className="">Dar nota</AlertDialogTitle>
+                    <AlbumDetails id={props.id} nome={props.nome} capa={props.capa} link={props.link} banda={props.banda} nota={props.nota} ratings={props.ratings} />
                 </AlertDialogContent>
             </AlertDialog>
 
