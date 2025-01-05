@@ -13,7 +13,9 @@ export interface Album{
         userId: number;
         nota: number;
         createdAt: string;
+        dateRated?: Date
       }[]
+      
 }
 
 export interface Track{

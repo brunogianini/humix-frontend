@@ -112,8 +112,8 @@ const data = {
   ],
   projects: [
     {
-      name: "Criar Board do mês",
-      url: "#",
+      name: "Ver meu ano",
+      url: "/ano",
       icon: Frame,
     },
     {
