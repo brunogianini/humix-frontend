@@ -6,6 +6,8 @@ import { DialogClose, DialogTitle } from "@radix-ui/react-dialog";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useState } from "react";
+import { toast } from "sonner";
+import { AlbumCard } from "./album-card";
 
 export function AddAlbumButton({ onAlbumAdded }: { onAlbumAdded?: () => void }) {
     const [nome, setNome] = useState("")
@@ -25,11 +27,20 @@ export function AddAlbumButton({ onAlbumAdded }: { onAlbumAdded?: () => void }) 
             },
             body: bodyContent
         })
+        const data = await album.json()
 
         setOpen(false)
+        toast(
+            <div className="flex gap-5">
+                <img className="rounded-2xl h-25 w-25" src={data.album.capa}/>
+                <p>{data.album.nome} - {data.album.banda.nome} foi adicionado</p>
+            </div>
+        )
         setNome("")
         setBanda("")
         if (onAlbumAdded) onAlbumAdded()
+
+        
     }
   return (
     <div>
