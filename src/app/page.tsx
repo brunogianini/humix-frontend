@@ -1,5 +1,6 @@
 'use client'
 
+import { AddAlbumButton } from "@/components/add-album-button";
 import { AlbumGrid } from "@/components/album-grid";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -31,7 +32,7 @@ export default function Home() {
     <div className="m-5 flex gap-5 flex-col w-full max-h-screen">
 
       <div className="w-full flex justify-end">
-        <Button className="cursor-pointer">Adicionar Álbum</Button>
+        <AddAlbumButton onAlbumAdded={getAlbums}/>
       </div>
       
       {!isLoading && <AlbumGrid albums={albums}/>}
