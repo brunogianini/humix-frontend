@@ -3,13 +3,17 @@
 import * as React from "react"
 import {
   AudioWaveform,
+  Bandage,
   BookOpen,
   Bot,
   Command,
   Frame,
   GalleryVerticalEnd,
+  Group,
+  GroupIcon,
   Map,
   Music,
+  PersonStanding,
   PieChart,
   Settings2,
   SquareTerminal,
@@ -50,10 +54,30 @@ const data = {
       items: [
         {
           title: "Meus Álbums",
-          url: "#",
+          url: "/albums",
         },
         {
           title: "Não Ouvidos",
+          url: "#",
+        },
+        {
+          title: "Recomendados",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Bandas",
+      url: "#",
+      icon: PersonStanding,
+      isActive: true,
+      items: [
+        {
+          title: "Minhas bandas",
+          url: "#",
+        },
+        {
+          title: "Meu ranking",
           url: "#",
         },
         {
