@@ -74,7 +74,7 @@ const data = {
       items: [
         {
           title: "Minhas bandas",
-          url: "#",
+          url: "/bandas",
         },
         {
           title: "Meu ranking",
