@@ -1,10 +1,15 @@
 import BandasCard from "./bandas-card";
 
-export default function BandasGrid(){
+interface BandaProps {
+    bandas: any[]
+}
+
+export default function BandasGrid({...props}: BandaProps){
     return(
-        <main className="w-full m-5 flex flex-col gap-5">
-            <BandasCard />
-            <BandasCard />
+        <main className="w-full flex flex-col gap-5">
+            {props.bandas.map((banda, key) => (
+                <BandasCard key={key} nome={banda.nome} foto={banda.foto} albums={banda.albums} />
+            ))}
         </main>
     )
 }
