@@ -28,7 +28,7 @@ export default function NaoOuvido(){
 
     return(
         <div className="m-5 flex gap-5 flex-col w-full max-h-screen">              
-            {!isLoading && <AlbumGrid albums={albums}/>}
+            {!isLoading && <AlbumGrid albums={albums} notaAdicionada={getAlbums}/>}
         </div>
     )
 }

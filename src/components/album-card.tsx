@@ -1,27 +1,55 @@
 "use client"
 
+import { toast } from "sonner"
 import AvaliarAlbumSheet from "./avaliar-album-sheet"
 import { Button } from "./ui/button"
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet"
 import { useState } from "react"
 
 interface AlbumProps {
+    id: string
     nome: string
     banda: string
     capa: string
     nota: number | undefined
+    notaAdicionada: () => void 
 }
 
 export function AlbumCard({...props}: AlbumProps){
     const [nota, setNota] = useState<number | null>(null)
+    const [open, setOpen] = useState(false)
+
     function handleNotaChange(n: number) {
         setNota(n)
     }
-    function salvarNota() {
-        console.log("Nota salva:", nota)
+
+    async function salvarNota() {
+        let bodyContent = JSON.stringify({
+            "userId": "1",
+            "albumId": props.id,
+            "nota": nota
+        })
+
+        const notaFinal = await fetch('http://localhost:3001/avaliar',{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: bodyContent
+        })
+        const data = await notaFinal.json()
+
+        setOpen(false)
+        toast(
+            <div className="flex gap-5">
+                <p>{props.nome} - {props.banda} recebeu nota: {nota}</p>
+            </div>
+        )
+
+        if (props.notaAdicionada) props.notaAdicionada()
     }
     return(
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger>
                 <div className="relative w-60 h-60 rounded-2xl cursor-pointer">
                     <img className="rounded-2xl w-60 h-60" src={props.capa} />

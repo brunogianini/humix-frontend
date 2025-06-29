@@ -41,7 +41,7 @@ export default function Page() {
         <AddAlbumButton onAlbumAdded={getAlbums}/>
       </div>
       
-      {!isLoading && <AlbumGrid albums={albums}/>}
+      {!isLoading && <AlbumGrid albums={albums} notaAdicionada={getAlbums}/>}
     </div>
   );
 }
