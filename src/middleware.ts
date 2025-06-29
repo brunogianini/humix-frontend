@@ -3,9 +3,10 @@ import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
-  // Permite acesso livre à página de login e à API de autenticação
+  // Permite acesso livre à página de login, à página de registro e à API de autenticação
   if (
     request.nextUrl.pathname.startsWith("/login") ||
+    request.nextUrl.pathname.startsWith("/registrar") ||
     request.nextUrl.pathname.startsWith("/api/auth")
   ) {
     return NextResponse.next();

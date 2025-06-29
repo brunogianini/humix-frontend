@@ -12,43 +12,76 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { signIn } from "next-auth/react"
-import { useSearchParams } from "next/navigation"
+import { useState } from "react"
 
-export function LoginForm({
+export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const searchParams = useSearchParams();
-  const error = searchParams.get("error");
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setError(null)
+    setSuccess(null)
     const form = e.currentTarget
+    const nome = (form.elements.namedItem("nome") as HTMLInputElement).value
     const email = (form.elements.namedItem("email") as HTMLInputElement).value
     const senha = (form.elements.namedItem("senha") as HTMLInputElement).value
 
-    await signIn("credentials", {
-      email,
-      senha,
-      callbackUrl: "/albums",
+    // Troque a URL abaixo pela sua rota de registro
+    const res = await fetch("https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/registrar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nome, email, senha })
     })
+
+    if (res.ok) {
+      setSuccess("Conta criada com sucesso! Faça login.")
+      form.reset()
+
+      // Login automático após registro
+      await signIn("credentials", {
+        email,
+        senha,
+        callbackUrl: "/albums"
+      })
+      return;
+    } else {
+      setError("Erro ao registrar. Tente outro e-mail.")
+    }
   }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Faça login em sua conta</CardTitle>
+          <CardTitle>Crie sua conta</CardTitle>
           <CardDescription>
-            Entre com seu e-mail
+            Registre-se com seu e-mail
           </CardDescription>
           {error && (
-            <div className="mt-2 text-red-600 font-semibold">Usuário ou senha inválidos.</div>
+            <div className="mt-2 text-red-600 font-semibold">{error}</div>
+          )}
+          {success && (
+            <div className="mt-2 text-green-600 font-semibold">{success}</div>
           )}
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
+
+                <div className="grid gap-3">
+                <Label htmlFor="nome">Usuário</Label>
+                <Input
+                  id="nome"
+                  type="nome"
+                  placeholder="user_123"
+                  required
+                />
+              </div>
+
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -59,28 +92,14 @@ export function LoginForm({
                 />
               </div>
               <div className="grid gap-3">
-                <div className="flex items-center">
-                  <Label htmlFor="senha">Senha</Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Esqueceu sua senha?
-                  </a>
-                </div>
+                <Label htmlFor="senha">Senha</Label>
                 <Input id="senha" type="password" required />
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="cursor-pointer w-full">
-                  Login
+                  Registrar
                 </Button>
               </div>
-            </div>
-            <div className="mt-4 text-center text-sm">
-              Não tem uma conta?{" "}
-              <a href="/registrar" className="underline underline-offset-4">
-                Registrar
-              </a>
             </div>
           </form>
         </CardContent>
