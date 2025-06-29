@@ -14,7 +14,7 @@ export default function Page() {
 
     async function getBandas(){
         setIsLoading(true)
-        const res = await fetch('http://localhost:3001/bandas/' + userId)
+        const res = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/bandas/' + userId)
         const data = await res.json()
 
         setBandas(data.bandas)

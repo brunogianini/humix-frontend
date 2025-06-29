@@ -35,7 +35,7 @@ export function AlbumCard({...props}: AlbumProps){
             "albumId": props.id
         })
 
-        const albumDelete = await fetch('http://localhost:3001/remover', {
+        const albumDelete = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/remover', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -62,7 +62,7 @@ export function AlbumCard({...props}: AlbumProps){
             "nota": nota
         })
 
-        const notaFinal = await fetch('http://localhost:3001/avaliar',{
+        const notaFinal = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/avaliar',{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

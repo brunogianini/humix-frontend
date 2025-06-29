@@ -22,7 +22,7 @@ export default function Page() {
   async function getAlbums() {
     setIsLoading(true);
     if (!userId) return;
-    const res = await fetch('http://localhost:3001/avaliacoes/' + userId);
+    const res = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/avaliacoes/' + userId);
     const data = await res.json();
     setAlbums(data.avaliacoes.map((a: any) => ({
       id: a.album.id,

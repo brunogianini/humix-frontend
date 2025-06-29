@@ -24,7 +24,7 @@ export function AddAlbumButton({ onAlbumAdded }: { onAlbumAdded?: () => void }) 
             "nome": nome,
             "banda": banda
         });
-        const album = await fetch('http://localhost:3001/adicionar',{
+        const album = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/adicionar',{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -11,7 +11,7 @@ export const authOptions = {
         senha: { label: "senha", type: "senha" }
       },
       async authorize(credentials) {
-        const res = await fetch('http://localhost:3001/login', {
+        const res = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/login', {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" }

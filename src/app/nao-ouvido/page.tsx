@@ -21,7 +21,7 @@ export default function NaoOuvido(){
 
     async function getAlbums(){
         setIsLoading(true)
-        const res = await fetch('http://localhost:3001/albums/' + userId)
+        const res = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/albums/' + userId)
         const data = await res.json()
         setAlbums(data.albums)
         
