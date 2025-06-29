@@ -5,6 +5,7 @@ import AvaliarAlbumSheet from "./avaliar-album-sheet"
 import { Button } from "./ui/button"
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet"
 import { useState } from "react"
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "./ui/context-menu"
 
 interface AlbumProps {
     id: string
@@ -21,6 +22,32 @@ export function AlbumCard({...props}: AlbumProps){
 
     function handleNotaChange(n: number) {
         setNota(n)
+    }
+
+    async function deletarAlbum(){
+        let bodyContent = JSON.stringify({
+            "userId": "1",
+            "albumId": props.id
+        })
+
+        const albumDelete = await fetch('http://localhost:3001/remover', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: bodyContent
+        })
+
+        const data = await albumDelete.json()
+
+        setOpen(false)
+        toast(
+            <div className="flex gap-5">
+                <p>{props.nome} - {props.banda} foi excluído</p>
+            </div>
+        )
+
+        if (props.notaAdicionada) props.notaAdicionada()
     }
 
     async function salvarNota() {
@@ -50,25 +77,33 @@ export function AlbumCard({...props}: AlbumProps){
     }
     return(
         <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger>
-                <div className="relative w-60 h-60 rounded-2xl cursor-pointer">
-                    <img className="rounded-2xl w-60 h-60" src={props.capa} />
-                    {props.nota !== undefined && props.nota !== null && (
-                        <div className="absolute top-2 right-2">
-                            <div className=" m-2 flex items-center justify-center">
-                                <div className="w-10 h-10 bg-gradient-to-r from-black to-white rounded-lg opacity-70"></div>
-                                <p className="font-bold opacity-100 text-white absolute">{props.nota}</p>
+            <ContextMenu>
+                <ContextMenuTrigger>
+                    <SheetTrigger>
+                        <div className="relative w-60 h-60 rounded-2xl cursor-pointer">
+                            <img className="rounded-2xl w-60 h-60" src={props.capa} />
+                            {props.nota !== undefined && props.nota !== null && (
+                                <div className="absolute top-2 right-2">
+                                    <div className=" m-2 flex items-center justify-center">
+                                        <div className="w-10 h-10 bg-gradient-to-r from-black to-white rounded-lg opacity-70"></div>
+                                        <p className="font-bold opacity-100 text-white absolute">{props.nota}</p>
 
+                                    </div>
+                                </div>
+                            )}
+                            <div className="absolute bottom-0 left-0 right-0 px-4 py-2 bg-gray-800 opacity-70 rounded-b-2xl">
+                                <h3 className="text-xl text-white font-bold truncate">{props.nome}</h3>
+                                <p className="mt-2 text-sm text-gray-300">{props.banda}</p>
                             </div>
                         </div>
-                    )}
-                    <div className="absolute bottom-0 left-0 right-0 px-4 py-2 bg-gray-800 opacity-70 rounded-b-2xl">
-                        <h3 className="text-xl text-white font-bold truncate">{props.nome}</h3>
-                        <p className="mt-2 text-sm text-gray-300">{props.banda}</p>
-                    </div>
-                </div>
-            </SheetTrigger>
+                    </SheetTrigger> 
+                </ContextMenuTrigger>
 
+                <ContextMenuContent>
+                    <ContextMenuItem onClick={() => deletarAlbum()} variant="destructive" className="cursor-pointer">Excluir álbum</ContextMenuItem>
+                </ContextMenuContent>
+            </ContextMenu>
+            
             <SheetContent>
                 <SheetHeader>
                     <SheetTitle>Avalie o álbum</SheetTitle>

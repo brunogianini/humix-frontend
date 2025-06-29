@@ -1,5 +1,6 @@
 "use client"
 
+import { AddAlbumButton } from "@/components/add-album-button"
 import { AlbumGrid } from "@/components/album-grid"
 import { useEffect, useState } from "react"
 
@@ -27,7 +28,11 @@ export default function NaoOuvido(){
     }, [])
 
     return(
-        <div className="m-5 flex gap-5 flex-col w-full max-h-screen">              
+        <div className="m-5 flex gap-5 flex-col w-full max-h-screen">   
+            <div className="w-full flex justify-end">
+                <AddAlbumButton onAlbumAdded={getAlbums}/>
+            </div>   
+
             {!isLoading && <AlbumGrid albums={albums} notaAdicionada={getAlbums}/>}
         </div>
     )

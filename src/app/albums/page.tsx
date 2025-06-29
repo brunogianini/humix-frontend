@@ -1,8 +1,6 @@
 'use client'
 
-import { AddAlbumButton } from "@/components/add-album-button";
 import { AlbumGrid } from "@/components/album-grid";
-import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 interface AlbumProps {
@@ -20,6 +18,7 @@ export default function Page() {
     const res = await fetch('http://localhost:3001/avaliacoes/1')
     const data = await res.json()
             setAlbums(data.avaliacoes.map((a: any) => ({
+            id: a.album.id, 
             nome: a.album.nome,
             banda: a.album.banda.nome,
             capa: a.album.capa,
@@ -36,10 +35,6 @@ export default function Page() {
 
   return (
     <div className="m-5 flex gap-5 flex-col w-full max-h-screen">
-
-      <div className="w-full flex justify-end">
-        <AddAlbumButton onAlbumAdded={getAlbums}/>
-      </div>
       
       {!isLoading && <AlbumGrid albums={albums} notaAdicionada={getAlbums}/>}
     </div>
