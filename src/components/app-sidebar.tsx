@@ -2,25 +2,13 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
-  Bandage,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
   GalleryVerticalEnd,
-  Group,
-  GroupIcon,
-  Map,
   Music,
   PersonStanding,
-  PieChart,
-  Settings2,
-  SquareTerminal,
+  User2,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
@@ -83,6 +71,26 @@ const data = {
         {
           title: "Recomendados",
           url: "#",
+        },
+      ],
+    },
+    {
+      title: "Usuários",
+      url: "#",
+      icon: User2,
+      isActive: true,
+      items: [
+        {
+          title: "Seguindo",
+          url: "/usuarios-seguindo",
+        },
+        {
+          title: "Meus seguidores",
+          url: "#",
+        },
+        {
+          title: "Buscar",
+          url: "/buscar-usuarios",
         },
       ],
     },
