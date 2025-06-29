@@ -19,11 +19,8 @@ export default function BuscarUsuarioGrid(){
     const userId = getUserIdFromSession(session)
 
     async function getUsers(){
-<<<<<<< HEAD
         const res = await fetch("https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/usuarios/" + userId)
-=======
-        const res = await fetch("http://localhost:3001/usuarios/" + userId)
->>>>>>> 2606ce8c070d64d42abc9a50c7184ec9b3827145
+
         const data = await res.json()
 
         setUsers(data.usuarios)
