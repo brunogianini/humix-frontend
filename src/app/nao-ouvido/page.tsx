@@ -29,7 +29,7 @@ export default function NaoOuvido(){
     }
     
     useEffect(() => {
-        getAlbums()
+        if (userId) getAlbums()
     }, [session])
 
     return(
