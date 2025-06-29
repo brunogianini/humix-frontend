@@ -18,7 +18,11 @@ export default function UserCard({...props}: UsuarioProps){
             "alvoId": props.id
         })
 
+<<<<<<< HEAD
         const seguir = await fetch('https://bumpy-unicorn-brunogianini-8376417b.koyeb.app/seguir',{
+=======
+        const seguir = await fetch('http://localhost:3001/seguir',{
+>>>>>>> 2606ce8c070d64d42abc9a50c7184ec9b3827145
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
