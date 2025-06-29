@@ -7,15 +7,20 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
+import { getUserIdFromSession } from "@/lib/get-user-id-from-session";
 
 export function AddAlbumButton({ onAlbumAdded }: { onAlbumAdded?: () => void }) {
+    const { data: session } = useSession()
     const [nome, setNome] = useState("")
     const [banda, setBanda] = useState("")
     const [open, setOpen] = useState(false)
 
+    const userId = getUserIdFromSession(session)
+
     async function adicionarAlbum(){
         let bodyContent = JSON.stringify({
-            "userId": "1",
+            "userId": userId,
             "nome": nome,
             "banda": banda
         });

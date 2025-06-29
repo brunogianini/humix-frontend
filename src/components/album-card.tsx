@@ -6,6 +6,8 @@ import { Button } from "./ui/button"
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet"
 import { useState } from "react"
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "./ui/context-menu"
+import { useSession } from "next-auth/react"
+import { getUserIdFromSession } from "@/lib/get-user-id-from-session"
 
 interface AlbumProps {
     id: string
@@ -17,8 +19,11 @@ interface AlbumProps {
 }
 
 export function AlbumCard({...props}: AlbumProps){
+    const { data: session } = useSession()
     const [nota, setNota] = useState<number | null>(null)
     const [open, setOpen] = useState(false)
+
+    const userId = getUserIdFromSession(session)
 
     function handleNotaChange(n: number) {
         setNota(n)
@@ -26,7 +31,7 @@ export function AlbumCard({...props}: AlbumProps){
 
     async function deletarAlbum(){
         let bodyContent = JSON.stringify({
-            "userId": "1",
+            "userId": userId,
             "albumId": props.id
         })
 
@@ -52,7 +57,7 @@ export function AlbumCard({...props}: AlbumProps){
 
     async function salvarNota() {
         let bodyContent = JSON.stringify({
-            "userId": "1",
+            "userId": userId,
             "albumId": props.id,
             "nota": nota
         })
