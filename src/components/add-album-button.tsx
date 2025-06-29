@@ -7,7 +7,6 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
-import { AlbumCard } from "./album-card";
 
 export function AddAlbumButton({ onAlbumAdded }: { onAlbumAdded?: () => void }) {
     const [nome, setNome] = useState("")
@@ -46,7 +45,7 @@ export function AddAlbumButton({ onAlbumAdded }: { onAlbumAdded?: () => void }) 
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button>Adicionar Álubm</Button>
+          <Button className="cursor-pointer">Adicionar Álubm</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
