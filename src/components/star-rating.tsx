@@ -3,7 +3,11 @@
 import { Star } from "lucide-react";
 import { useState } from "react";
 
-export default function StarRating(){
+interface StarRatingProps {
+    onChange?: (nota: number) => void;
+}
+
+export default function StarRating({ onChange }: StarRatingProps){
     const [nota, setNota] = useState(0)
     const [notaEscolhida, setNotaEscolhida] = useState<number | null>(null)
     const estrelas = Array.from({ length: 10 }, (_, i) => i + 1)
@@ -15,6 +19,7 @@ export default function StarRating(){
     function escolherNota(nota: number) {
         setNotaEscolhida(nota)
         setNota(nota)
+        if (onChange) onChange(nota)
     }
 
     function resetarNota(){

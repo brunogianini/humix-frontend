@@ -1,5 +1,7 @@
 import AvaliarAlbumSheet from "./avaliar-album-sheet"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet"
+import { Button } from "./ui/button"
+import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet"
+import { useState } from "react"
 
 interface AlbumProps {
     nome: string
@@ -8,6 +10,13 @@ interface AlbumProps {
 }
 
 export function AlbumCard({...props}: AlbumProps){
+    const [nota, setNota] = useState<number | null>(null)
+    function handleNotaChange(n: number) {
+        setNota(n)
+    }
+    function salvarNota() {
+        console.log("Nota salva:", nota)
+    }
     return(
         <Sheet>
             <SheetTrigger>
@@ -20,14 +29,24 @@ export function AlbumCard({...props}: AlbumProps){
                     </div>
                 </div>
             </SheetTrigger>
+
             <SheetContent>
                 <SheetHeader>
                     <SheetTitle>Avalie o álbum</SheetTitle>
                 </SheetHeader>
                 <main>
-                    <AvaliarAlbumSheet nome={props.nome} banda={props.banda} capa={props.capa} />
+                    <AvaliarAlbumSheet nome={props.nome} banda={props.banda} capa={props.capa} onNotaChange={handleNotaChange} />
                 </main>
+
+                <SheetFooter>
+                    <Button className="cursor-pointer" onClick={salvarNota}>Salvar nota</Button>
+                    <SheetClose asChild>
+                        <Button className="cursor-pointer" variant={"outline"}>Fechar</Button>
+                    </SheetClose>
+                </SheetFooter>
+
             </SheetContent>
+
         </Sheet>
 
     )
