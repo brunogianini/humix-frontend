@@ -58,7 +58,7 @@ const data = {
         },
         {
           title: "Não Ouvidos",
-          url: "#",
+          url: "/nao-ouvido",
         },
         {
           title: "Recomendados",

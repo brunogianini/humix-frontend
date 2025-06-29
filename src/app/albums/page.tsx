@@ -17,10 +17,16 @@ export default function Page() {
 
   async function getAlbums(){
     setIsLoading(true)
-    const res = await fetch('http://localhost:3001/albums/1')
+    const res = await fetch('http://localhost:3001/avaliacoes/1')
     const data = await res.json()
+            setAlbums(data.avaliacoes.map((a: any) => ({
+            nome: a.album.nome,
+            banda: a.album.banda.nome,
+            capa: a.album.capa,
+            nota: a.nota
+        })))
 
-    setAlbums(data.albums)
+    
     setIsLoading(false)
   }
 
