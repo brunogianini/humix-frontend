@@ -50,7 +50,7 @@ export function AddAlbumButton({ onAlbumAdded }: { onAlbumAdded?: () => void }) 
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="cursor-pointer">Adicionar Álubm</Button>
+          <Button className="cursor-pointer">Adicionar Álbum</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
