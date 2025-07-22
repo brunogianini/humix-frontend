@@ -29,13 +29,16 @@ export default function UserCard({...props}: UsuarioProps){
         if (props.onUserFollow) props.onUserFollow()
     }
     return(
-        <div className="h-25 w-80 rounded-2xl border-2 flex items-center p-2 gap-5">
-            <img className="h-20" src={props.foto} alt="" />
-            <div>
-                {props.nome}
-                {props.me_segue? <Badge>Te segue</Badge> : ""}
+        <div className="h-20 w-120 rounded-2xl border-2 flex items-center justify-between p-2 gap-5">
+            <div className="flex flex-row gap-5 items-center">
+                <img className="h-15" src={props.foto} alt="" />
+                <div className="flex flex-col">
+                    {props.nome}
+                    {props.me_segue? <Badge>Te segue</Badge> : ""}
+                </div>
             </div>
-            {props.seguindo ? "" : <Button className="cursor-pointer" onClick={seguirUsuario}>Seguir</Button>}
+
+            {props.seguindo ? <Button disabled className="cursor-pointer mr-5" onClick={seguirUsuario}>Seguindo</Button> : <Button className="cursor-pointer mr-5" onClick={seguirUsuario}>Seguir</Button>}
             
         </div>
     )
